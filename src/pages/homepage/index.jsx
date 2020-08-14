@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './homepage.module.scss';
 import LinkButton from '../../components/button/linkButton';
-import Button from '../../components/button';
 
 class HomePage extends Component {
     render() {
