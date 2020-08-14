@@ -1,0 +1,37 @@
+
+button{
+    height: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    border-radius: 0.25rem;
+    transition: all 1s;
+
+    &.normal{
+        background: #1A74EA;
+        color: #FFF;
+        border: none;
+        width: 13rem;
+        height: 50px;
+
+        &:hover {
+            color: #1A74EA;
+            background: #FFF;
+            border: 1.4px solid #1A74EA;
+        }
+    }
+
+    &.google{
+        color: #FFF;
+        background: #C7332C;
+        padding: 0.5rem 2rem;
+        transition: all 0.7s;
+
+        &:hover {
+            background: #FFF;
+            color: #C7332C;
+            border: 1.4px solid #C7332C;
+        }
+    }
+}

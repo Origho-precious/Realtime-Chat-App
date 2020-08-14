@@ -1,0 +1,45 @@
+
+.normal {
+    background: #1A74EA;
+    color: #FFF;
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    margin: 0 1rem;
+    border: none;
+    padding: 0.5rem 5rem;
+    transition: all 1s;
+
+    &:hover {
+        color: #1A74EA;
+        background: #FFF;
+        border: 1.4px solid #1A74EA;
+    }
+}
+
+.outline {
+    color: #1A74EA; 
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    margin: 0 1rem;
+    border: 1.4px solid #1A74EA;
+    padding: 0.5rem 5rem;
+    transition: all 1s;
+
+    &:hover {
+        background: #1A74EA;
+        color: #FFF;
+        border: none;
+    }
+}
+
+@media(max-width: 500px){
+    .normal, .outline {
+        width: 80%;
+        margin: 0.7rem auto;
+        text-align: center;
+    }
+}

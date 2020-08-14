@@ -1,0 +1,43 @@
+
+.Signup {
+    max-width: 50%;
+    margin: 2rem auto;
+    text-align: center;
+
+    & hr {
+        height: 2px;
+        background: #000;
+        margin: 1rem 0;
+    }
+
+    & .google {
+        margin-bottom: 1rem;
+
+        & h3 {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    & p {
+        font-size: 1.2rem;
+        font-weight: 600;
+
+        & a {
+            color: #1A74EA;
+            text-decoration: none;
+            transition: all 1s;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}
+
+
+@media(max-width: 500px) {
+    .Signup {
+        max-width: 90%;
+        margin-top: 1rem;
+    }
+}

@@ -1,0 +1,45 @@
+.Chat{
+    max-width: 100%;
+
+    & h2{
+        text-align: center;
+        color: #1A74EA;
+        font-size: 2rem;
+    }
+
+    & .textField{
+        max-width: 100%;
+        margin: 3rem auto 2rem;
+
+        & textarea{
+            width: 100%;
+            height: 150px;
+            resize: none;
+            padding: 1rem;
+            font-size: 1.2rem;
+            text-transform: capitalize;
+            outline: none;
+            border: 1.5px solid #ccc;
+            border-radius: 0.5rem;
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .Chat {
+        margin: 1.5rem auto;
+
+        & h2 {
+            font-size: 1.5rem;
+        }
+
+        & .textField {
+
+            & textarea {
+                height: 100px;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+    }
+}

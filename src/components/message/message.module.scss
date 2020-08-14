@@ -1,0 +1,19 @@
+
+.Message{
+    height: max-content;
+    width: max-content;
+    padding: 0.5rem 1rem;
+    margin: 1rem auto;
+    border: 1.5px solid #1A74EA;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+
+    & p{
+        font-weight: 500;
+    }
+
+    & small{
+        color: #1A74EA;
+        font-weight: 600;
+    }
+}
