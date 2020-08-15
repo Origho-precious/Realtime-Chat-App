@@ -9,9 +9,9 @@ export const setCurrentUser = (userData) => {
 }
 
 export const sendMessage = (message, user) => async (dispatch) => {
-    const chatsRef = firestore.collection('chats')
     
     try {
+        const chatsRef = firestore.collection('chats')
         chatsRef.add({
             user,
             message,
@@ -23,12 +23,48 @@ export const sendMessage = (message, user) => async (dispatch) => {
         await chatsRef.orderBy("date", "desc").get()
             .then(querySnapshot => {
                 querySnapshot.forEach(doc => {
-                    messages.push(doc.data());
+                    let message = {
+                        user: doc.data().user,
+                        message: doc.data().message,
+                        date: doc.data().date,
+                        id: doc.id
+                    }
+
+                    messages.push(message);
                 });
             });
 
         dispatch({
             type: 'SEND_MESSAGE',
+            payload: messages
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteMessage = (messageId) => async (dispatch) => {
+    try {
+        await firestore.doc(`chats/${messageId}`).delete()
+        const chatsRef = firestore.collection('chats')
+        let messages = []
+
+        await chatsRef.orderBy("date", "desc").get()
+            .then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    let message = {
+                        user: doc.data().user,
+                        message: doc.data().message,
+                        date: doc.data().date,
+                        id: doc.id
+                    }
+
+                    messages.push(message);
+                });
+            });
+
+        dispatch({
+            type: 'DELETE_MESSAGE',
             payload: messages
         })
     } catch (error) {
@@ -44,12 +80,19 @@ export const fetchMessages = () => async (dispatch) => {
             .orderBy("date", "desc").get()
             .then(querySnapshot => {
                 querySnapshot.forEach(doc => {
-                    messages.push(doc.data());
+                    let message = {
+                        user: doc.data().user,
+                        message: doc.data().message,
+                        date: doc.data().date,
+                        id: doc.id
+                    }
+
+                    messages.push(message);
                 });
             });
 
         dispatch({
-            type: 'SEND_MESSAGE',
+            type: 'FETCH_MESSAGES',
             payload: messages
         })
     } catch (error) {

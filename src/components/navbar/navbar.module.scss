@@ -15,6 +15,10 @@
         }
     }
 
+    & .hamburger{
+        display: none;
+    }
+
     & a, .link{
         font-weight: 800;
         text-decoration: none;
@@ -38,12 +42,9 @@
     }
 }
 
-@media(max-width: 500px){
+@media(max-width: 700px){
     .Nav {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        position: relative;
 
         & .logo {
             font-size: 1.5rem;
@@ -54,6 +55,10 @@
             &:hover {
                 color: #000;
             }
+        }
+
+        & .hamburger {
+            display: block;
         }
 
         & a,
@@ -68,15 +73,25 @@
             }
         }
 
-        & .navItems {
+        & .show{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            top: 3rem;
+            left: 0;
+            background: #ccc;
+            padding: 0.5rem 1rem 2rem 0;
+            transition: all 1s;
 
             & .link {
+                color: #1A74EA;
                 margin: 0 1rem;
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
+        }
+
+        & .navItems {
+            display: none;
         }
     }
 }

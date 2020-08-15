@@ -14,6 +14,8 @@ export const messageReducer = (state = null, action) => {
             return action.payload
         case 'FETCH_MESSAGES':
             return action.payload
+        case 'DELETE_MESSAGE':
+            return action.payload
         default:
             return state
     }

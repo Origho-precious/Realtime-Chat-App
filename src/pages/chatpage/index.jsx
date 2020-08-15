@@ -6,18 +6,22 @@ import Button from '../../components/button';
 import { sendMessage } from '../../redux/actions';
 
 class ChatPage extends Component {
-  state = {
-    message: "",
-  };
+    state = {
+        message: "",
+    };
 
-  sendMessage = () => {
-    if (this.state.message && this.props.user) {
-      // Send Message to firestore db
-      this.props.sendMessage(this.state.message, this.props.user.email);
-      // Clear text field
-      this.setState({ message: "" });
+    componentDidMount() {
+        
     }
-  };
+
+    sendMessage = () => {
+        if (this.state.message && this.props.user) {
+            // Send Message to firestore db
+            this.props.sendMessage(this.state.message, this.props.user.email);
+            // Clear text field
+            this.setState({ message: "" });
+        }
+    };
 
     formatTime(timestamp) {
         const d = new Date(timestamp * 1000);
@@ -29,9 +33,10 @@ class ChatPage extends Component {
         const { messages } = this.props;
 
         if (messages) {
-            return messages.map((message, id) => {
+            return messages.map(message => {
                 return <Message
-                            key={id}
+                            key={message.id}
+                            id={message.id}
                             date={this.formatTime(message.date.seconds)}
                             text={message.message}
                             sender={message.user}
@@ -41,7 +46,6 @@ class ChatPage extends Component {
     };
 
     render() {
-        this.renderMessages()
         return (
             <div className={styles.Chat}>
                 <h2>Conversation:</h2>
