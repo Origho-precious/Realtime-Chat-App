@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/navbar';
-import HomePage from './pages/homepage';
-import Signup from './pages/signuppage';
-import Signin from './pages/signinpage';
-import ChatsPage from './pages/chatpage';
 import { auth, createUserDocument } from './firebase';
 import { setCurrentUser, fetchMessages } from './redux/actions';
+import ErrorBoundary from './components/errorBoundary';
+const Navbar = lazy(() => import('./components/navbar'));
+const HomePage = lazy(() => import('./pages/homepage'));
+const Signup = lazy(() => import('./pages/signuppage'));
+const Signin = lazy(() => import('./pages/signinpage'));
+const ChatsPage = lazy(() => import('./pages/chatpage'));
 
 class App extends Component{
 
@@ -43,25 +44,29 @@ class App extends Component{
 		return (
 			<div className="App">
 				<BrowserRouter>
-					<Navbar />
-					<Switch>
-						<Route exact path="/" component={HomePage} />
-						<Route exact path="/signup" >
-							{
-								this.props.user ? <Redirect to='/signin'/> : <Signup/>
-							}
-						</Route>
-						<Route exact path="/signin">
-							{
-								this.props.user ? <Redirect to='/discussions' /> : <Signin/>
-							}
-						</Route>
-						<Route exact path="/discussions" >
-							{
-								!this.props.user ? <Redirect to='/signup'/> : <ChatsPage/>
-							}
-						</Route>
-					</Switch>
+					<ErrorBoundary>
+						<Suspense fallback={<div> Loading... </div>}>
+							<Navbar />
+							<Switch>
+								<Route exact path="/" component={HomePage} />
+								<Route exact path="/signup" >
+									{
+										this.props.user ? <Redirect to='/signin'/> : <Signup/>
+									}
+								</Route>
+								<Route exact path="/signin">
+									{
+										this.props.user ? <Redirect to='/discussions' /> : <Signin/>
+									}
+								</Route>
+								<Route exact path="/discussions" >
+									{
+										!this.props.user ? <Redirect to='/signup'/> : <ChatsPage/>
+									}
+								</Route>
+							</Switch>
+						</Suspense>
+					</ErrorBoundary>
 				</BrowserRouter>
 			</div>
     	);
